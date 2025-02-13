@@ -309,10 +309,6 @@ export default function Home() {
                 answer: "Não, nosso aplicativo atende tanto iniciantes quanto investidores experientes com recomendações claras."
               },
               {
-                question: "Posso cancelar quando quiser?",
-                answer: "Sim, você pode cancelar sua assinatura a qualquer momento, com reembolso proporcional."
-              },
-              {
                 question: "É seguro investir com as recomendações?",
                 answer: "Nossas recomendações são baseadas em análises cuidadosas, mas todo investimento envolve riscos."
               }
