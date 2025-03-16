@@ -52,10 +52,22 @@ export default function PrivacyPolicy() {
             <>
               <div className="bg-white/5 border border-white/10 rounded-lg p-6">
                 <p className="text-sm text-neutral-400">Última atualização: {new Date().toLocaleDateString('pt-BR')}</p>
-                <p className="mt-4">
-                  A Futuros Tech está comprometida com a proteção da sua privacidade. Esta política descreve como coletamos, 
-                  usamos e protegemos suas informações pessoais quando você utiliza nosso site e serviços.
-                </p>
+                <div className="mt-4 space-y-4">
+                  <p>
+                    A Futuros Tech, através do aplicativo FIP ("Aplicativo"), desenvolvido por LYS Metaverse, 
+                    está comprometida com a proteção da sua privacidade. Esta política descreve como coletamos, 
+                    usamos e protegemos suas informações pessoais quando você utiliza nosso aplicativo e serviços.
+                  </p>
+                  
+                  <div className="bg-white/5 border border-white/10 rounded-lg p-4 text-sm">
+                    <p className="font-medium text-green-400 mb-2">Informações do Desenvolvedor:</p>
+                    <ul className="space-y-1 text-neutral-300">
+                      <li>Aplicativo: FIP</li>
+                      <li>Desenvolvedor: LYS Metaverse</li>
+                      <li>Endereço: Av Nações Unidas 14401, Chacara Santo Antonio, São Paulo</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <section>
@@ -202,8 +214,8 @@ export default function PrivacyPolicy() {
                   <p className="mb-4">Para questões sobre privacidade ou exercício de seus direitos:</p>
                   <ul className="list-none space-y-2">
                     <li>Email: privacy@futurostech.com</li>
-                    <li>WhatsApp: [Número de Contato]</li>
-                    <li>Endereço: [Endereço Físico]</li>
+                    <li>Desenvolvedor: LYS Metaverse</li>
+                    <li>Endereço: Av Nações Unidas 14401, Chacara Santo Antonio, São Paulo</li>
                   </ul>
                 </div>
               </section>
@@ -219,10 +231,22 @@ export default function PrivacyPolicy() {
             <>
               <div className="bg-white/5 border border-white/10 rounded-lg p-6">
                 <p className="text-sm text-neutral-400">Last updated: {new Date().toLocaleDateString('en-US')}</p>
-                <p className="mt-4">
-                  Futuros Tech is committed to protecting your privacy. This policy describes how we collect, 
-                  use, and protect your personal information when you use our website and services.
-                </p>
+                <div className="mt-4 space-y-4">
+                  <p>
+                    Futuros Tech, through the FIP application ("App"), developed by LYS Metaverse, 
+                    is committed to protecting your privacy. This policy describes how we collect, 
+                    use, and protect your personal information when you use our app and services.
+                  </p>
+                  
+                  <div className="bg-white/5 border border-white/10 rounded-lg p-4 text-sm">
+                    <p className="font-medium text-green-400 mb-2">Developer Information:</p>
+                    <ul className="space-y-1 text-neutral-300">
+                      <li>Application: FIP</li>
+                      <li>Developer: LYS Metaverse</li>
+                      <li>Address: Av Nações Unidas 14401, Chacara Santo Antonio, São Paulo</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <section>
@@ -369,8 +393,8 @@ export default function PrivacyPolicy() {
                   <p className="mb-4">For privacy concerns or to exercise your rights:</p>
                   <ul className="list-none space-y-2">
                     <li>Email: privacy@futurostech.com</li>
-                    <li>WhatsApp: [Contact Number]</li>
-                    <li>Address: [Physical Address]</li>
+                    <li>Developer: LYS Metaverse</li>
+                    <li>Address: Av Nações Unidas 14401, Chacara Santo Antonio, São Paulo</li>
                   </ul>
                 </div>
               </section>
