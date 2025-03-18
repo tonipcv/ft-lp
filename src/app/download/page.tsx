@@ -1,12 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { Globe, Apple, PlaySquare } from "lucide-react";
+import { Globe, Apple, PlaySquare, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Download() {
   const [language, setLanguage] = useState<'pt' | 'en'>('pt');
+  const [showModal, setShowModal] = useState(false);
+
+  const handleAndroidClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
+
+  const handleDownload = () => {
+    window.location.href = "https://drive.google.com/file/d/1WO-_Y6lbJ47gbzzaBvLBWfRmq1D1ZJ5x/view?usp=sharing";
+    setShowModal(false);
+  };
 
   return (
     <div className="font-montserrat bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-white min-h-screen">
@@ -53,22 +64,69 @@ export default function Download() {
           </a>
 
           {/* Android APK Download */}
-          <a 
-            href="/futurostech-v1.apk"
+          <button 
+            onClick={handleAndroidClick}
             className="group flex flex-col items-center justify-center bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-800 rounded-lg p-8 hover:border-zinc-600 transition-all duration-300"
-            download
           >
             <PlaySquare className="w-12 h-12 mb-4 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
             <span className="text-sm text-zinc-500 group-hover:text-zinc-300 transition-colors">
               Android
             </span>
-          </a>
+          </button>
         </div>
 
         <p className="text-xs text-zinc-600 mt-16">
           © {new Date().getFullYear()} Futuros Tech
         </p>
       </div>
+
+      {/* Installation Tutorial Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl max-w-lg w-full p-6 relative">
+            <button 
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <h3 className="text-xl font-light mb-6">
+              {language === 'pt' ? 'Como instalar o app' : 'How to install the app'}
+            </h3>
+
+            <div className="space-y-4 text-sm text-zinc-300">
+              <p>
+                {language === 'pt' 
+                  ? '1. Clique no botão de download abaixo'
+                  : '1. Click the download button below'}
+              </p>
+              <p>
+                {language === 'pt'
+                  ? '2. Ao baixar o arquivo APK, você receberá um aviso de segurança. Isso é normal, pois o app não está na Play Store'
+                  : '2. When downloading the APK file, you will receive a security warning. This is normal as the app is not on the Play Store'}
+              </p>
+              <p>
+                {language === 'pt'
+                  ? '3. Nas configurações do seu Android, permita a instalação de apps de fontes desconhecidas'
+                  : '3. In your Android settings, allow installation of apps from unknown sources'}
+              </p>
+              <p>
+                {language === 'pt'
+                  ? '4. Abra o arquivo APK baixado e siga as instruções de instalação'
+                  : '4. Open the downloaded APK file and follow the installation instructions'}
+              </p>
+            </div>
+
+            <button
+              onClick={handleDownload}
+              className="mt-8 w-full bg-green-500/10 text-green-400 border border-green-500/20 rounded-lg px-6 py-3 text-sm hover:bg-green-500/20 transition-colors"
+            >
+              {language === 'pt' ? 'Fazer Download' : 'Download'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 
