@@ -6,10 +6,16 @@ import Image from 'next/image';
 import { OptimizedImage } from '@/components/OptimizedImage';
 import { PandaPlayer } from '@/components/PandaPlayer';
 import { PricingSection } from '@/components/pricing/PricingSection';
+import { useRouter } from 'next/navigation';
 
 export default function InformacaoClient() {
+  const router = useRouter();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  const [redirected, setRedirected] = useState(false);
+  const [countdown, setCountdown] = useState(5);
+
+  const whatsappLink = "https://wa.me/5511976650763?text=Olá%20quero%20acesso%20aos%206%20novos%20sinais%20de%20entradas%20de%20criptomoedas%20de%20hoje!";
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -24,6 +30,18 @@ export default function InformacaoClient() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else if (!redirected) {
+      setRedirected(true);
+      window.location.href = whatsappLink;
+    }
+  }, [countdown, redirected, whatsappLink]);
+
   return (
     <div className="min-h-screen bg-[#111] text-gray-200">
       <header className="fixed top-0 w-full bg-[#111]/90 backdrop-blur-sm z-50 px-4 py-3">
@@ -33,12 +51,12 @@ export default function InformacaoClient() {
           </Link>
           
           <a 
-            href="https://t.me/+tOj6h-B6rrM0MDYx"
+            href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs px-3 py-1.5 text-black bg-white rounded-full hover:bg-gray-100 transition-colors duration-200"
           >
-            Entrar no Grupo
+            Acessar Sinais de Cripto
           </a>
         </div>
       </header>
@@ -46,69 +64,25 @@ export default function InformacaoClient() {
       <main className="pt-24 pb-20">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-light">
-              <span className="text-neutral-200">Somente com uma Operação</span>
-              <div className="mt-4">
-                <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-white via-neutral-200 to-white bg-clip-text text-transparent font-medium">
-                    você pode fazer o{' '}
-                  </span>
-                  <span className="relative inline-block group">
-                    <span className="bg-gradient-to-r from-white via-neutral-100 to-white bg-clip-text text-transparent font-semibold">
-                      Dobro do Investimento
-                    </span>
-                    <div className="absolute -bottom-1 left-0 w-full h-[1px]">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white to-white/40 animate-pulse" />
-                    </div>
-                    <div className="absolute -inset-1 bg-white/5 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </span>
-                </span>
-              </div>
-            </h2>
-          </div>
-
-          <div className="bg-black rounded-2xl overflow-hidden mb-12 shadow-xl">
-            <div className="relative pb-[56.25%]">
-              <PandaPlayer videoId="6a82bc71-be86-4d83-be38-99cf230e7298" />
-            </div>
-          </div>
-
-          <div className="relative mt-12 mb-16">
-            <div className="overflow-hidden rounded-2xl">
-              <div 
-                className="flex transition-transform duration-500 ease-out" 
-                style={{ 
-                  transform: `translateX(-${currentTestimonial * (windowWidth <= 768 ? 50 : 33.333)}%)`
-                }}
-              >
-                {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <div 
-                    key={num} 
-                    className="w-1/2 md:w-1/3 flex-shrink-0 px-2"
-                  >
-                    <div className="relative rounded-xl overflow-hidden shadow-lg">
-                      <Image
-                        src={`/depoimento${num}.webp`}
-                        alt={`Depoimento ${num}`}
-                        width={400}
-                        height={300}
-                        className="w-full h-auto"
-                      />
-                    </div>
-                  </div>
-                ))}
+            <div className="flex flex-col items-center justify-center mb-8">
+              <p className="text-xl mb-6">Redirecionando para WhatsApp em:</p>
+              <div className="relative flex items-center justify-center">
+                <div className="absolute inset-0 bg-white/5 rounded-full blur-md"></div>
+                <div className="text-5xl font-bold text-white bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent w-24 h-24 flex items-center justify-center rounded-full border-2 border-white/20">
+                  {countdown}
+                </div>
               </div>
             </div>
+            <p className="text-sm mb-8">Se não for redirecionado automaticamente, clique no botão abaixo:</p>
+            <a 
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-8 py-4 text-lg font-medium text-black bg-white rounded-full hover:bg-gray-100 transition-colors duration-200 shadow-lg hover:shadow-xl"
+            >
+              ACESSAR OS 6 NOVOS SINAIS DE CRIPTO HOJE →
+            </a>
           </div>
-
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-medium bg-gradient-to-r from-white via-neutral-200 to-white bg-clip-text text-transparent">
-              Faça o seu upgrade agora ou aguarde o desconto
-            </h2>
-          </div>
-
-          <PricingSection />
         </div>
       </main>
     </div>
