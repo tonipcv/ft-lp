@@ -333,8 +333,12 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 text-center bg-black">
-        <p className="text-neutral-500 text-xs">Futuros Tech - Todos os direitos reservados</p>
+      <footer className="py-4 px-4">
+        <div className="max-w-4xl mx-auto flex justify-center items-center">
+          <Link href="/terms" className="text-xs text-neutral-400 hover:text-white transition-colors">
+            {language === 'pt' ? 'Termos de Uso' : 'Terms of Use'}
+          </Link>
+        </div>
       </footer>
     </div>
   );
