@@ -1,16 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-type Language = 'pt' | 'en';
+type Language = 'pt';
 
 export function useLanguage(): Language {
-  const [language, setLanguage] = useState<Language>('pt');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const browserLang = navigator.language.toLowerCase();
-      setLanguage(browserLang.startsWith('pt') ? 'pt' : 'en');
-    }
-  }, []);
-
-  return language;
+  return 'pt';
 } 

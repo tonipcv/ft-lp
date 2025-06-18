@@ -22,27 +22,14 @@ export default function Terms() {
 
       <main className="pt-24 pb-20">
         <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-8">{t.title}</h1>
+          <h1 className="text-3xl font-bold mb-2">{t.title}</h1>
+          <p className="text-sm text-neutral-400 mb-8">{t.lastUpdate}</p>
           
           <div className="prose prose-invert max-w-none">
             <div className="bg-white/5 p-6 rounded-lg mb-8">
-              <h2 className="text-xl font-semibold mb-4">{t.legalDisclaimer}</h2>
-              
-              <p className="mb-4">{t.intro}</p>
-
-              <p className="mb-6">{t.serviceTitle}</p>
-              
-              <ul className="list-disc pl-6 mb-6 space-y-2">
-                {t.servicePoints.map((point, index) => (
-                  <li key={index}>{point}</li>
-                ))}
-              </ul>
-
-              <p className="mb-4">{t.riskAcknowledgment}</p>
-
-              <p className="mb-4">{t.userDiscretion}</p>
-
-              <p className="mb-4">{t.finalDisclaimer}</p>
+              <div className="whitespace-pre-wrap font-light text-sm leading-relaxed">
+                {t.content}
+              </div>
             </div>
           </div>
         </div>
