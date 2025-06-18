@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
-export function useLanguage() {
-  const [language, setLanguage] = useState('pt');
+type Language = 'pt' | 'en';
+
+export function useLanguage(): Language {
+  const [language, setLanguage] = useState<Language>('pt');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

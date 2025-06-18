@@ -8,7 +8,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 
 export default function Terms() {
   const language = useLanguage();
-  const t = translations[language];
+  const t = translations[language as keyof typeof translations];
 
   return (
     <div className="min-h-screen bg-[#111] text-gray-200">
