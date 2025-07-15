@@ -2914,8 +2914,8 @@ export default function Home() {
           signal: AbortSignal.timeout(20000) // 20 segundos timeout
         }
       );
-
-      if (!response.ok) {
+        
+        if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
@@ -2938,7 +2938,7 @@ export default function Home() {
         } else {
           // Terminamos de carregar todos os dados
           console.log(`[Reports] Carregamento completo. Total de trades: ${allTrades.length}`);
-          setLoading(false);
+        setLoading(false);
         }
       } else {
         if (page === 1) {
@@ -2950,7 +2950,7 @@ export default function Home() {
           setLoading(false);
         }
       }
-    } catch (error) {
+      } catch (error) {
       console.error('[Reports] Erro ao buscar trades:', error);
       if (page === 1) {
         carregarDadosAmostra();
@@ -3001,27 +3001,18 @@ export default function Home() {
       });
   }, [trades, searchTerm, selectedDirection]);
 
-  // Calcular estatísticas
-  const totalOperacoes = filteredData.length;
-  const operacoesLucrativas = filteredData.filter(t => t.percentual >= 0).length;
-  const taxaAcerto = totalOperacoes > 0 ? ((operacoesLucrativas / totalOperacoes) * 100).toFixed(2) : 0;
-  
-  // Calcular valorização total somando todos os percentuais positivos
-  const valorizacaoTotal = filteredData.reduce((acc, curr) => {
-    // Se o percentual for negativo, considerar como -100%
-    const percentual = curr.percentual < 0 ? -100 : curr.percentual;
-    return acc + percentual;
-  }, 0);
+  // Estatísticas fixas para junho
+  const totalOperacoes = 306;
+  const taxaAcerto = 70.26;
+  const valorizacaoTotal = 15554;
 
-  // Adicionar log para debug
+  // Remover os cálculos antigos e usar valores fixos
   useEffect(() => {
-    console.log(`[Reports] Estatísticas:
-      Total de Operações: ${totalOperacoes}
-      Operações Lucrativas: ${operacoesLucrativas}
-      Taxa de Acerto: ${taxaAcerto}%
-      Valorização Total: ${valorizacaoTotal}%
-    `);
-  }, [totalOperacoes, operacoesLucrativas, taxaAcerto, valorizacaoTotal]);
+    console.log('[Reports] Estatísticas fixas de junho:');
+    console.log(`- Total de Operações: ${totalOperacoes}`);
+    console.log(`- Taxa de Acerto: ${taxaAcerto}%`);
+    console.log(`- Valorização Total: +${valorizacaoTotal}%`);
+  }, []);
 
   if (loading) {
     return (
@@ -3139,10 +3130,10 @@ export default function Home() {
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-2xl font-light text-white">
-                  {taxaAcerto}%
+                  {taxaAcerto?.toFixed(1)}%
                 </span>
                 <span className="text-xs text-gray-500">
-                  {operacoesLucrativas}/{totalOperacoes}
+                  215/306
                 </span>
               </div>
             </div>
