@@ -92,7 +92,7 @@ export default function Home() {
   const [trades, setTrades] = useState<Trade[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDirection, setSelectedDirection] = useState<'ALL' | 'LONG' | 'SHORT'>('ALL');
-  const [selectedMonth, setSelectedMonth] = useState<number>(2);
+  const [selectedMonth, setSelectedMonth] = useState<number>(6);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorState, setErrorState] = useState<{hasError: boolean; message: string}>({
     hasError: false,
