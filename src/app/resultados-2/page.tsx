@@ -3003,16 +3003,25 @@ export default function Home() {
 
   // Calcular estatísticas
   const totalOperacoes = filteredData.length;
-  const operacoesLucrativas = filteredData.filter(t => t.percentual > 0).length;
-  const taxaAcerto = totalOperacoes > 0 ? ((operacoesLucrativas / totalOperacoes) * 100) : 0;
-  const valorizacaoTotal = filteredData.reduce((acc, curr) => acc + curr.percentual, 0);
+  const operacoesLucrativas = filteredData.filter(t => t.percentual >= 0).length;
+  const taxaAcerto = totalOperacoes > 0 ? ((operacoesLucrativas / totalOperacoes) * 100).toFixed(2) : 0;
+  
+  // Calcular valorização total somando todos os percentuais positivos
+  const valorizacaoTotal = filteredData.reduce((acc, curr) => {
+    // Se o percentual for negativo, considerar como -100%
+    const percentual = curr.percentual < 0 ? -100 : curr.percentual;
+    return acc + percentual;
+  }, 0);
 
   // Adicionar log para debug
   useEffect(() => {
-    console.log(`[Reports] Total de trades carregados: ${trades.length}`);
-    console.log(`[Reports] Total de trades após filtro: ${filteredData.length}`);
-    console.log(`[Reports] Critérios de filtro - Busca: "${searchTerm}", Direção: ${selectedDirection}`);
-  }, [trades.length, filteredData.length, searchTerm, selectedDirection]);
+    console.log(`[Reports] Estatísticas:
+      Total de Operações: ${totalOperacoes}
+      Operações Lucrativas: ${operacoesLucrativas}
+      Taxa de Acerto: ${taxaAcerto}%
+      Valorização Total: ${valorizacaoTotal}%
+    `);
+  }, [totalOperacoes, operacoesLucrativas, taxaAcerto, valorizacaoTotal]);
 
   if (loading) {
     return (
@@ -3130,7 +3139,7 @@ export default function Home() {
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-2xl font-light text-white">
-                  {taxaAcerto?.toFixed(1)}%
+                  {taxaAcerto}%
                 </span>
                 <span className="text-xs text-gray-500">
                   {operacoesLucrativas}/{totalOperacoes}
